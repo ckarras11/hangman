@@ -1,12 +1,27 @@
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
 .game-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: url('https://orig00.deviantart.net/1039/f/2010/304/f/a/cartoon_castle_scene_by_rasulh-d31vi8o.jpg');
+    background-size: cover;
+}
+#result {
+    margin: 0;
+}
+#answer {
+    margin-top: 5px;
 }
 #hang {
-    border: solid black 1px;
+    border: solid transparent 1px;
+    background-color: rgba(255, 255, 255, 0.8)
+
 }
 ul {
     list-style: none;
@@ -17,6 +32,7 @@ ul {
 }
 .letter {
     padding: 5px;
+    font-size: 30px;
 }
 #letters{
     display: flex;
@@ -31,13 +47,15 @@ ul {
     align-items: center;
     border: solid black 1px;
     border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.8)
+
 }
 .letter-btn:hover {
     cursor: pointer;
-    background-color: #777;
+    background-color: rgba(255, 255, 255, 0);
 }
 .selected {
-    background-color: #777
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .js-hide-display {
@@ -48,7 +66,10 @@ ul {
     padding: 5px;
     margin-bottom: 10px;
     border-radius: 5px;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(255,255,255,0.8);
     width: 60px;
     outline: none;
+}
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0)
 }
