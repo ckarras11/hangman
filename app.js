@@ -6,35 +6,7 @@ let arr;
 let strike;
 let correct;
 
-function initializeGame() {
-    $('#result').text('');
-    $('#answer').text('');
-    $('#word').html('');
-    $('.letter-btn').removeClass('selected');
-    $('#restart').addClass('js-hide-display')
-
-    index = Math.floor(Math.random() * words.length);
-    word = words[index];
-    arr = word.toLowerCase().split('');
-    strike = 0;
-    correct = 0;
-    console.log(word);
-
-    arr.forEach((letter, index) => {
-        $('#word').append(`<li class="letter" id=${index}>_</li>`)
-    });
-
-    clearCanvas();
-
-    // Draw gallows
-    draw(70, 130, 150, 130);
-    draw(110, 10, 110, 130);
-    draw(110, 10, 170, 10);
-    draw(170, 10, 170, 20);
-}
-
 function game() {
-
     initializeGame();
 
     //Body
@@ -56,9 +28,7 @@ function game() {
 
     $('#letters').on('click', 'li', (e) => {
         let guess = e.currentTarget.id
-        if ($(`#${guess}`).hasClass('selected')) {
-            console.log('picked already')
-        } else {
+        if (!$(`#${guess}`).hasClass('selected')){
             $(`#${guess}`).addClass('selected');
             if (arr.includes(guess)) {
                 arr.forEach((letter, index) => {
@@ -71,18 +41,33 @@ function game() {
                 body[strike]();
                 strike++;
             }
-        }
+        } 
         if (correct === arr.length) {
-            $('#result').text('You Win!')
-            $('#restart').removeClass('js-hide-display')
+            endMsg('You Win!')
         }
         if (strike === 6) {
-            $('#result').text('You Lose =(')
+            endMsg('You Lose =(')
             $('#answer').text(`The correct answer was ${word}`)
-            $('#restart').removeClass('js-hide-display')
         }
     })
     handleRestart();
+}
+
+function initializeGame() {
+    index = Math.floor(Math.random() * words.length);
+    word = words[index];
+    arr = word.toLowerCase().split('');
+    strike = 0;
+    correct = 0;
+    console.log(word)
+
+    arr.forEach((letter, index) => $('#word').append(`<li class="letter" id=${index}>_</li>`));
+
+    // Draw gallows
+    draw(70, 130, 150, 130);
+    draw(110, 10, 110, 130);
+    draw(110, 10, 170, 10);
+    draw(170, 10, 170, 20);
 }
 
 function draw(mx, my, lx, ly) {
@@ -102,11 +87,18 @@ function clearCanvas() {
 
 function handleRestart() {
     $('#restart').on('click', () => {
+        $('#result').text('');
+        $('#answer').text('');
+        $('#word').html('');
+        $('.letter-btn').removeClass('selected');
+        $('#restart').addClass('js-hide-display')
+        clearCanvas();
         initializeGame();
     })
 }
 
 function endMsg(msg) {
-
+    $('#result').text(msg)
+    $('#restart').removeClass('js-hide-display')
 }
 game()
