@@ -17,6 +17,7 @@ html, body {
 }
 #answer {
     margin-top: 5px;
+    text-align: center;
 }
 #hang {
     border: solid transparent 1px;
